@@ -101,7 +101,7 @@ SPARQL
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $sparqlurl);
 	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_USERAGENT, 'nklink/1.0 (nklink.toolserver.org service, run by <petr.kadlec@gmail.com>)');
+	curl_setopt($ch, CURLOPT_USERAGENT, 'nklink/1.0 (nklink.toolforge.org service, run by <petr.kadlec@gmail.com>)');
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('From: petr.kadlec@gmail.com'));
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_TIMEOUT, API_TIMEOUT);
@@ -304,6 +304,7 @@ function outputHtml($result, $autid, $params)
 <head>
 <meta charset=utf-8>
 <title><?php echo $caption ?></title>
+<link href='favicon.ico' rel='shortcut icon' type='image/x-icon'>
 </head>
 <body>
 <h1><?php echo $caption ?></h1>
@@ -349,6 +350,7 @@ function reportError($statusCode, $caption, $error)
 <head>
 <meta charset=utf-8>
 <title><?php echo $caption ?></title>
+<link href='favicon.ico' rel='shortcut icon' type='image/x-icon'>
 </head>
 <body>
 <h1><?php echo $caption ?></h1>
