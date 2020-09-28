@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>NKlink</title>
+    <link rel="icon" type="image/x-icon" href="https://tools-static.wmflabs.org/nklink/img/favicon.ico" />
+    <link href="https://tools-static.wmflabs.org/nklink/css/styles.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />  
+    <link href="assets/css/styles.css" rel="stylesheet" />
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-sidebar fixed-top" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <span class="d-block d-lg-none">NKlink</span>
+            <span class="d-none d-lg-block">
+                <img class="img-fluid img-profile mx-auto mb-2" src="https://tools-static.wmflabs.org/nklink/img/logo-575.png" alt="" />
+            </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Přepnout zobrazení navigace"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">NKlink</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#usecases">Co nástroj umí</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#bugs">Jak nahlásit chybu</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#othertools">Podobné nástroje</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#links">Odkazy, dokumentace</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid p-0">
+        <!-- About -->
+        <section class="resume-section" id="about">
+            <div class="resume-section-content">
+                <h1 class="mb-0">NKlink</h1>
+                <div class="subheading mb-5">
+                </div>
+                <p class="lead mb-5">
+                    NKlink je nástroj určený pro provozovatele databází, v jejichž záznamech jsou uvedeny identifikátory
+                    <a href="https://autority.nkp.cz/">Národních autorit</a> (NKČR ID)&nbsp;– tedy pro různé knihovny,
+                    muzea a další zejména české instituce. Pokud tento identifikátor ve své databázi evidujete, můžete
+                    si pomocí něj stahovat různé další užitečné údaje z projektu <a href="https://www.wikidata.org/">Wikidata</a>,
+                    popřípadě odkazovat na články na Wikipedii a na související záznamy v některých dalších autoritních databázích.
+                </p>
+            </div>
+        </section>
+        <hr class="m-0" />
+        <!-- Use cases -->
+        <section class="resume-section" id="usecases">
+            <div class="resume-section-content">
+                <h2 class="mb-5">Co nástroj umí</h2>
+                <div class="subheading mb-5">
+                    Nástroj můžete použít několika způsoby podle toho, co vaše databáze a používané programové vybavení
+                    umožňuje.
+                </div>
+
+                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-0">Zobrazení stránky s přehledem údajů</h3>
+                        <div class="subheading mb-3">Kontrola dat, testování</div>
+                        <p>Abyste získali představu o datech, která tento nástroj poskytuje, můžete se podívat na
+                            jednoduché zobrazení pro konkrétní identifikátor autoritního záznamu.</p>
+                    </div>
+                    <div class="flex-shrink-0"><span class="text-primary"><a
+                                href="https://nklink.toolforge.org/link.php?autid=nlk19990073741">příklad</a></span>
+                    </div>
+                </div>
+                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-0">Získání informací a odkazů z položky ve Wikidatech</h3>
+                        <div class="subheading mb-3">Strojové zpracování, začlenění do existující databáze</div>
+                        <p>Pokud chcete informace použít ve vaší stránce, můžete z nástroje získat strojově čitelná
+                            data, která následně na své straně zpracujete i zobrazíte podle potřeby. Stejně jako v
+                            případě přehledové stránky, se konkrétně jedná o štítek (název) položky v češtině, popisek
+                            položky v češtině, odkaz na Wikidata, odkaz na článek na Wikipedii a některé důležité
+                            identifikátory v dalších autoritních databázích (ORCID, ISNI).</p>
+                    </div>
+                    <div class="flex-shrink-0"><span class="text-primary"><a
+                                href="https://nklink.toolforge.org/link.php?autid=nlk19990073741&format=json">příklad
+                                získaných JSON dat</a></span></div>
+                </div>
+                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-0">Odkaz na příslušný článek ve Wikipedii či jiných webech</h3>
+                        <div class="subheading mb-3">Jednoduchý odkaz pro vaše uživatele</div>
+                        <p>Pokud chcete čtenářům nabídnout možnost dohledání odpovídajícího článku na Wikipedii či
+                            záznamu v jiné databázi, aniž byste museli integrovat zpracování dat do vašeho programového
+                            vybavení, můžete čtenářům zobrazit jednoduchý odkaz, který přesměrovává na záznam dané osoby
+                            v databázích ORCID, ISNI, Wikidata či na příslušný článek ve Wikipedii.</p>
+                    </div>
+                    <div class="flex-shrink-0"><span class="text-primary"><a
+                                href="https://nklink.toolforge.org/link.php?autid=nlk19990073741&format=redirect&target=orcid">příklad
+                                odkazu na ORCID</a></span></div>
+                </div>
+            </div>
+        </section>
+        <hr class="m-0" />
+        <!-- Bugs -->
+        <section class="resume-section" id="bugs">
+            <div class="resume-section-content">
+                <h2 class="mb-5">Jak nahlásit chybu</h2>
+                <div class="subheading mb-5">
+                    Narazili jste při používání NKlinku na nějaký problém?
+                </div>
+
+                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-0">Technické chyby a chybějící funkcionality</h3>
+                        <p>Pokud narazíte na technickou chybu v nástroji nebo vám v nástroji chybí nějaká funkcionalita,
+                            kterou by vaše databáze využila, můžete to <a
+                                href="https://github.com/mormegil-cz/nklink/issues/new">nahlásit přímo na GitHubu</a>
+                            nebo napsat na e-mail <a
+                                href="mailto:wikidata%40wikimedia.cz">wikidata&#x40;wikimedia.cz</a> (spolek Wikimedia
+                            ČR).</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-0">Nesprávný odkaz či jiné údaje</h3>
+                        <p>Pokud nástroj přesměrovává z určitého identifikátoru Národních autorit na chybný (nesprávný)
+                            záznam odpovídající jiné osobě, případně data poskytovaná nástrojem obsahují jiné faktické
+                            chyby, můžete <a href="https://www.wikidata.org/wiki/Help:Items/cs">provést opravu ve
+                                Wikidatech</a> sami nebo napsat na e-mail <a
+                                href="mailto:wikidata%40wikimedia.cz">wikidata&#x40;wikimedia.cz</a> (spolek Wikimedia
+                            ČR).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr class="m-0" />
+        <!-- Other tools -->
+        <section class="resume-section" id="othertools">
+            <div class="resume-section-content">
+                <h2 class="mb-5">Podobné nástroje</h2>
+
+                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-0">Hub</h3>
+                        <p>Podobné funkce, avšak pro libovolné identifikátory ve Wikidatech, nabízí <a
+                                href="https://hub.toolforge.org/">nástroj Hub</a>. Na rozdíl od něj je NKlink vytvořen
+                            specificky pro české prostředí a jakožto jeho tvůrci můžeme garantovat jeho dlouhodobou
+                            stabilitu a poskytovat k němu podporu.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr class="m-0" />
+        <!-- Links-->
+        <section class="resume-section" id="links">
+            <div class="resume-section-content">
+                <h2 class="mb-5">Odkazy, dokumentace</h2>
+                <ul class="mb-0 list-unstyled">
+                    <li>
+                        <a href="https://github.com/mormegil-cz/nklink/">
+                            <svg focusable="false" alt="" width="0.9rem" height="0.9rem" viewBox="0 0 16 16"
+                                class="bi bi-file-earmark-code" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" />
+                                <path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z" />
+                                <path fill-rule="evenodd"
+                                    d="M8.646 6.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 9 8.646 7.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 9l1.647-1.646a.5.5 0 0 0 0-.708z" />
+                            </svg>
+                            <span>Zdrojové kódy na Githubu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/mormegil-cz/nklink/wiki/N%C3%A1vrh-API">
+                            <svg focusable="false" alt="" width="0.9rem" height="0.9rem" viewBox="0 0 16 16"
+                                class="bi bi-question-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                <path
+                                    d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                            </svg>
+                            <span>API dokumentace</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/mormegil-cz/nklink/wiki/Testovac%C3%AD-p%C5%99%C3%ADpady">
+                            <svg focusable="false" alt="" width="0.9rem" height="0.9rem" viewBox="0 0 16 16"
+                                class="bi bi-list-ul" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                            </svg>
+                            <span>Příklady použití</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.wikimedia.cz">
+                            <svg focusable="false" alt="" width="0.9rem" height="0.9rem" viewBox="0 0 16 16"
+                                class="bi bi-people" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                            </svg>
+                            <span>spolek Wikimedia Česká republika</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.wikidata.org/">
+                            <svg focusable="false" alt="" width="0.9rem" height="0.9rem" viewBox="0 0 16 16" class="bi bi-upc"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+                            </svg>
+                            <span>Wikidata</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/groups/151013568681003">
+                            <svg focusable="false" alt="" width="0.9rem" height="0.9rem" viewBox="0 0 256 256" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                preserveAspectRatio="xMidYMid">
+                                <g>
+                                    <path
+                                        d="M241.871,256.001 C249.673,256.001 256,249.675 256,241.872 L256,14.129 C256,6.325 249.673,0 241.871,0 L14.129,0 C6.324,0 0,6.325 0,14.129 L0,241.872 C0,249.675 6.324,256.001 14.129,256.001 L241.871,256.001"
+                                        fill="currentColor"></path>
+                                    <path
+                                        d="M176.635,256.001 L176.635,156.864 L209.912,156.864 L214.894,118.229 L176.635,118.229 L176.635,93.561 C176.635,82.375 179.742,74.752 195.783,74.752 L216.242,74.743 L216.242,40.188 C212.702,39.717 200.558,38.665 186.43,38.665 C156.932,38.665 136.738,56.67 136.738,89.736 L136.738,118.229 L103.376,118.229 L103.376,156.864 L136.738,156.864 L136.738,256.001 L176.635,256.001"
+                                        fill="#FFFFFF"></path>
+                                </g>
+                            </svg>
+                            <span>Facebooková skupina Wikidata CS</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous"></script>
+    <!-- Core theme JS-->
+    <script src="https://tools-static.wmflabs.org/nklink/js/scripts.js"></script>
+    <!-- HTML template adapted from https://github.com/StartBootstrap/startbootstrap-resume/ (MIT license) -->
+</body>
+</html>
