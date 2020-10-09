@@ -304,7 +304,7 @@ function outputHtml($result, $autid, $params)
 <head>
 <meta charset=utf-8>
 <title><?php echo $caption ?></title>
-<link href='favicon.ico' rel='shortcut icon' type='image/x-icon'>
+<link rel="icon" type="image/x-icon" href="https://tools-static.wmflabs.org/nklink/img/favicon.ico" />
 </head>
 <body>
 <h1><?php echo $caption ?></h1>
@@ -350,7 +350,7 @@ function reportError($statusCode, $caption, $error)
 <head>
 <meta charset=utf-8>
 <title><?php echo $caption ?></title>
-<link href='favicon.ico' rel='shortcut icon' type='image/x-icon'>
+<link rel="icon" type="image/x-icon" href="https://tools-static.wmflabs.org/nklink/img/favicon.ico" />
 </head>
 <body>
 <h1><?php echo $caption ?></h1>
