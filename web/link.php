@@ -43,7 +43,10 @@ SELECT ?entity ?entityLabel ?entityDescription ?linkWpCs ?linkWpEn ?linkWpSk ?li
 WITH
 {
 	SELECT * WHERE {
-		?entity p:P691/ps:P691 "$autid".
+		?entity p:P691 [
+			ps:P691 "$autid";
+			wikibase:rank ?rank;
+		]
 
 		OPTIONAL {
 			?linkWpCs a schema:Article;
@@ -75,6 +78,7 @@ WITH
 						schema:about ?entity;
 						schema:isPartOf <https://pl.wikipedia.org/>
 		}
+		FILTER (?rank != wikibase:DeprecatedRank)
 	}
 	LIMIT 1
 } AS %itemWithLinks
