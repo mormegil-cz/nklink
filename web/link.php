@@ -2,36 +2,36 @@
 
 // ----- config -----
 
-define('MAX_AUTID_LENGTH', 32);
-define('MAX_CALLBACK_LENGTH', 32);
-define('MAX_CLIENT_CACHING_TIME', 86400);
-define('API_TIMEOUT', 30);
-define('REDIS_CACHE_TIMEOUT', 60 * 60 * 24);
-define('REDIS_CACHE_TIMEOUT_EMPTY', 60 * 30);
-define('REDIS_SERVER', 'tools-redis.svc.eqiad.wmflabs');
-define('REDIS_PORT', 6379);
-define('REDIS_KEY_PREFIX', 'gBV0mSIgaC1mSQ:');
+const MAX_AUTID_LENGTH = 32;
+const MAX_CALLBACK_LENGTH = 32;
+const MAX_CLIENT_CACHING_TIME = 86400;
+const API_TIMEOUT = 30;
+const REDIS_CACHE_TIMEOUT = 60 * 60 * 24;
+const REDIS_CACHE_TIMEOUT_EMPTY = 60 * 30;
+const REDIS_SERVER = 'tools-redis.svc.eqiad.wmflabs';
+const REDIS_PORT = 6379;
+const REDIS_KEY_PREFIX = 'gBV0mSIgaC1mSQ:';
 
-define('FORMATTERS', array(
-	'json' => 'outputJson',
-	'jsonp' => 'outputJsonp',
-	'redirect' => 'outputRedirect',
-	'html' => 'outputHtml'
-));
-define('SUPPORTED_DATABASES', array(
-	'wikidata' => 'https://www.wikidata.org/wiki/$1',
-	'wikipedia' => '$1',
-	'isni' => 'https://isni.oclc.org/xslt/DB=1.2//CMD?ACT=SRCH&IKT=8006&TRM=ISN%3A$1',
-	'orcid' => 'https://orcid.org/$1',
-	'abart' => 'https://cs.isabart.org/person/$1'
-));
-define('DATABASE_NAMES', array(
-	'wikidata' => 'Wikidata',
-	'wikipedia' => 'Wikipedia',
-	'isni' => 'ISNI',
-	'orcid' => 'ORCID',
-	'abart' => 'abART'
-));
+const FORMATTERS = array(
+    'json' => 'outputJson',
+    'jsonp' => 'outputJsonp',
+    'redirect' => 'outputRedirect',
+    'html' => 'outputHtml'
+);
+const SUPPORTED_DATABASES = array(
+    'wikidata' => 'https://www.wikidata.org/wiki/$1',
+    'wikipedia' => '$1',
+    'isni' => 'https://isni.oclc.org/xslt/DB=1.2//CMD?ACT=SRCH&IKT=8006&TRM=ISN%3A$1',
+    'orcid' => 'https://orcid.org/$1',
+    'abart' => 'https://cs.isabart.org/person/$1'
+);
+const DATABASE_NAMES = array(
+    'wikidata' => 'Wikidata',
+    'wikipedia' => 'Wikipedia',
+    'isni' => 'ISNI',
+    'orcid' => 'ORCID',
+    'abart' => 'abART'
+);
 
 define('REDIS_AVAILABLE', class_exists('Redis'));
 
@@ -139,7 +139,6 @@ SPARQL
 	}
 
 	$resultBindings = $retrievedData['results']['bindings'];
-	$results = array();
 	$firstResult = reset($resultBindings);
 	if (!$firstResult)
 	{
@@ -147,8 +146,8 @@ SPARQL
 		return new ArrayObject();
 	}
 
-	$resultLabel = $firstResult['entityLabel']['value'];
-	$resultDescription = $firstResult['entityDescription']['value'];
+	$resultLabel = getResultValue($firstResult, 'entityLabel');
+	$resultDescription = getResultValue($firstResult, 'entityDescription');
 	$resultWpLink = null;
 	foreach(array('Cs', 'En', 'Sk', 'De', 'Fr', 'Pl') as $lang)
 	{
@@ -201,7 +200,12 @@ SPARQL
 	);
 }
 
-function makeLink($url, $ident)
+function getResultValue($result, $field)
+{
+    return isset($result[$field]) ? $result[$field]['value'] : null;
+}
+
+function makeLink($url, $ident): array
 {
 	return array(
 		'ident' => $ident,
@@ -209,7 +213,7 @@ function makeLink($url, $ident)
 	);
 }
 
-function titleFromUrl($url)
+function titleFromUrl($url): string
 {
 	$lastSlash = strrpos($url, '/');
 	return urldecode(strtr(($lastSlash < 0) ? $url : substr($url, $lastSlash + 1), '_', ' '));
@@ -217,7 +221,7 @@ function titleFromUrl($url)
 
 function initRedis()
 {
-	if (!REDIS_AVAILABLE) return;
+	if (!REDIS_AVAILABLE) return null;
 
 	$r = new Redis();
 	$r->connect(REDIS_SERVER, REDIS_PORT);
@@ -250,6 +254,7 @@ function outputHeaders($outputString, $outputContentType)
 	header('Expires: ' . gmdate(DATE_RFC1123, time() + MAX_CLIENT_CACHING_TIME));
 }
 
+/** @noinspection PhpUnused */
 function outputJson($result, $autid, $params)
 {
 	$output = json_encode($result);
@@ -257,6 +262,7 @@ function outputJson($result, $autid, $params)
 	echo $output;
 }
 
+/** @noinspection PhpUnused */
 function outputJsonp($result, $autid, $params)
 {
 	$callback = $params['callback'];
@@ -265,6 +271,7 @@ function outputJsonp($result, $autid, $params)
 	echo $output;
 }
 
+/** @noinspection PhpUnused */
 function outputRedirect($result, $autid, $params)
 {
 	if (!is_array($result) || !isset($result['links'])) {
@@ -293,6 +300,7 @@ function outputRedirect($result, $autid, $params)
 	header("Location: $url");
 }
 
+/** @noinspection PhpUnused */
 function outputHtml($result, $autid, $params)
 {
 	if (!is_array($result) || !isset($result['links'])) {
@@ -309,7 +317,7 @@ function outputHtml($result, $autid, $params)
 
 	ob_start();
 ?><!doctype html>
-<html>
+<html lang="cs">
 <head>
 <meta charset=utf-8>
 <title><?php echo $caption ?></title>
@@ -355,7 +363,7 @@ function reportError($statusCode, $caption, $error)
 	http_response_code($statusCode);
 	header('Content-Type', 'text/html');
 ?><!doctype html>
-<html>
+<html lang="en">
 <head>
 <meta charset=utf-8>
 <title><?php echo $caption ?></title>
@@ -385,7 +393,7 @@ function main()
 		return;
 	}
 
-	$format = isset($_GET['format']) ? $_GET['format'] : 'html';
+	$format = $_GET['format'] ?? 'html';
 	if (!isset(FORMATTERS[$format])) {
 		reportError(400, 'Bad Request', 'Unsupported format');
 		return;
