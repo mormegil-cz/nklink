@@ -22,13 +22,15 @@ define('SUPPORTED_DATABASES', array(
 	'wikidata' => 'https://www.wikidata.org/wiki/$1',
 	'wikipedia' => '$1',
 	'isni' => 'https://isni.oclc.org/xslt/DB=1.2//CMD?ACT=SRCH&IKT=8006&TRM=ISN%3A$1',
-	'orcid' => 'https://orcid.org/$1'
+	'orcid' => 'https://orcid.org/$1',
+	'abart' => 'https://cs.isabart.org/person/$1'
 ));
 define('DATABASE_NAMES', array(
 	'wikidata' => 'Wikidata',
 	'wikipedia' => 'Wikipedia',
 	'isni' => 'ISNI',
-	'orcid' => 'ORCID'
+	'orcid' => 'ORCID',
+	'abart' => 'abART'
 ));
 
 define('REDIS_AVAILABLE', class_exists('Redis'));
@@ -39,7 +41,7 @@ function queryWikidata($autid)
 {
 	$nocache = time();
 	$sparqlQuery = urlencode(str_replace("\t", "", <<<SPARQL
-SELECT ?entity ?entityLabel ?entityDescription ?linkWpCs ?linkWpEn ?linkWpSk ?linkWpDe ?linkWpFr ?linkWpPl ?orcid ?isni
+SELECT ?entity ?entityLabel ?entityDescription ?linkWpCs ?linkWpEn ?linkWpSk ?linkWpDe ?linkWpFr ?linkWpPl ?orcid ?isni ?abart
 WITH
 {
 	SELECT * WHERE {
@@ -91,6 +93,9 @@ WHERE
 	}
 	OPTIONAL {
 		?entity wdt:P213 ?isni
+	}
+	OPTIONAL {
+		?entity wdt:P6844 ?abart
 	}
 
 	SERVICE wikibase:label {
@@ -158,7 +163,7 @@ SPARQL
 	// extract distinct values
 	foreach($resultBindings as $row)
 	{
-		foreach (array('isni', 'orcid') as $db) {
+		foreach (array('isni', 'orcid', 'abart') as $db) {
 			if (isset($row[$db])) {
 				$dbId = $row[$db]['value'];
 				if (isset($dbResults[$db])) {
@@ -175,7 +180,7 @@ SPARQL
 		'wikidata' => array(makeLink($firstResult['entity']['value'], titleFromUrl($firstResult['entity']['value'])))
 	);
 	if ($resultWpLink) $resultLinks['wikipedia'] = array(makeLink($resultWpLink, titleFromUrl($resultWpLink)));
-	foreach (array('isni', 'orcid') as $db) {
+	foreach (array('isni', 'orcid', 'abart') as $db) {
 		if (isset($dbResults[$db])) {
 			foreach(array_keys($dbResults[$db]) as $dbId)
 			{
