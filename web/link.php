@@ -21,7 +21,7 @@ const FORMATTERS = array(
 const SUPPORTED_DATABASES = array(
     'wikidata' => 'https://www.wikidata.org/wiki/$1',
     'wikipedia' => '$1',
-    'isni' => 'https://isni.oclc.org/xslt/DB=1.2//CMD?ACT=SRCH&IKT=8006&TRM=ISN%3A$1',
+    'isni' => 'https://isni.org/isni/$1',
     'orcid' => 'https://orcid.org/$1',
     'abart' => 'https://cs.isabart.org/person/$1'
 );
